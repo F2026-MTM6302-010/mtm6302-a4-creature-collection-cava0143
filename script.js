@@ -40,7 +40,6 @@ const $creatures = [
 
 // YOUR WORK: build these features using the supplied HTML, CSS, and data.
 // 1. Select the collection and preference controls.
-
 const $collection = document.getElementById("collection");
 const $theme = document.getElementById("theme");
 const $layout = document.getElementById("layout");
@@ -48,7 +47,6 @@ const $status = document.getElementById("status");
 
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
 /* I was not able to find a START-HERE.md so I saw the ASSIGNMENT.md and README.md  if it's not a problem. */
-
 for (const $creature of $creatures) {
     const $creatureHTML = `
   <li class="creature">
@@ -64,6 +62,16 @@ for (const $creature of $creatures) {
 }
 
 // 3. Listen for changes to each preference control and update the appearance.
+/* Changing the habitat theme and its features */
+$theme.addEventListener("change", function() {
+    document.body.setAttribute("data-theme", $theme.value);
+});
+
+/* Organizing the cards accodring to each layout provided */
+$layout.addEventListener("change", function() {
+    $collection.setAttribute("data-layout", $layout.value);
+});
 // 4. Save both selected preferences to Local Storage.
+
 // 5. Check for saved data on load and restore the controls and appearance.
 // Add short pseudocode comments before writing each feature.
