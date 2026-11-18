@@ -45,7 +45,7 @@ const $collection = document.getElementById("collection");
 const $theme = document.getElementById("theme");
 const $layout = document.getElementById("layout");
 const $status = document.getElementById("status");
-// Conitnuing the consts from html for the step 4
+// Continuing the consts from html for the step 4
 const $storageKey = "mtm6302-a4-preferences";
 
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
@@ -73,14 +73,14 @@ $theme.addEventListener("change", function() {
     savePreferences() /* calling the function created to save the preferences chosen for the theme */
 });
 
-/* Organizing the cards accodring to each layout provided */
+/* Organizing the cards according to each layout provided */
 $layout.addEventListener("change", function() {
     $collection.setAttribute("data-layout", $layout.value);
     savePreferences() /* calling the function created to save the preferences chosen for the cards layout */
 });
 
 // 4. Save both selected preferences to Local Storage.
-/* For this part, it is when the user changes the layout, update the collection appearance and save the preferences */
+/* Get the selected theme and layout and save both preferences in Local Storage */
 function savePreferences() {
     const $preferences = {
         theme: $theme.value,
@@ -92,7 +92,7 @@ function savePreferences() {
 }
 
 // 5. Check for saved data on load and restore the controls and appearance.
-/* Get the selected theme and layout chosen, convert them into a JSON string which is a format that structures the data according to JSON syntax rules and save them in the Local Storage */
+/* Get the saved preferences from Local Storage and convert the JSON string back into a JavaScript object */
 /* Also checks if there are saved preferences, get that saved information, and apply it to the page */
 const $savedPreferences = localStorage.getItem($storageKey);
 if ($savedPreferences !== null) { /* when there is no saved preferences it turns null, and !== verify if the result is different than null */
@@ -103,6 +103,7 @@ if ($savedPreferences !== null) { /* when there is no saved preferences it turns
   document.body.setAttribute("data-theme", $preferences.theme);
   $collection.setAttribute("data-layout", $preferences.layout);
   /* now I'm setting the preferences to be visible in the page, to change the appearence based on what I chose in the page */
-  $status.textContent = "Your preferences have been restored."; /* tell the user a message that the changes they made were restores */
+  $status.textContent = "Your preferences have been restored."; /* tell the user a message that the changes they made were restored */
 }
+
 // Add short pseudocode comments before writing each feature.
