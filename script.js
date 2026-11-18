@@ -40,6 +40,7 @@ const $creatures = [
 
 // YOUR WORK: build these features using the supplied HTML, CSS, and data.
 // 1. Select the collection and preference controls.
+/* Selecting the collection, theme, layout and status elements from the HTML */
 const $collection = document.getElementById("collection");
 const $theme = document.getElementById("theme");
 const $layout = document.getElementById("layout");
@@ -49,6 +50,7 @@ const $storageKey = "mtm6302-a4-preferences";
 
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
 /* I was not able to find a START-HERE.md so I saw the ASSIGNMENT.md and README.md  if it's not a problem. */
+/* Go through each creature in the array, getting their information, and add it to the collection */
 for (const $creature of $creatures) {
     const $creatureHTML = `
   <li class="creature">
@@ -65,6 +67,7 @@ for (const $creature of $creatures) {
 
 // 3. Listen for changes to each preference control and update the appearance.
 /* Changing the habitat theme and its features */
+/* This part is for when the user changes the theme, update the page appearance and save these preferences */
 $theme.addEventListener("change", function() {
     document.body.setAttribute("data-theme", $theme.value);
     savePreferences() /* calling the function created to save the preferences chosen for the theme */
@@ -77,6 +80,7 @@ $layout.addEventListener("change", function() {
 });
 
 // 4. Save both selected preferences to Local Storage.
+/* For this part, it is when the user changes the layout, update the collection appearance and save the preferences */
 function savePreferences() {
     const $preferences = {
         theme: $theme.value,
@@ -88,6 +92,8 @@ function savePreferences() {
 }
 
 // 5. Check for saved data on load and restore the controls and appearance.
+/* Get the selected theme and layout chosen, convert them into a JSON string which is a format that structures the data according to JSON syntax rules and save them in the Local Storage */
+/* Also checks if there are saved preferences, get that saved information, and apply it to the page */
 const $savedPreferences = localStorage.getItem($storageKey);
 if ($savedPreferences !== null) { /* when there is no saved preferences it turns null, and !== verify if the result is different than null */
   const $preferences = JSON.parse($savedPreferences);
