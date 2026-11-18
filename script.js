@@ -84,6 +84,7 @@ function savePreferences() {
     };
 
     localStorage.setItem($storageKey, JSON.stringify($preferences)); /* just to remind me: this is just to tell that I want to save the preferences in the local storage, that's why I am setting an item, after to save these preferences I should get the item on local storage */
+    $status.textContent = "Your preferences have been saved."; /* tell the user a message that the changes they made were saved */
 }
 
 // 5. Check for saved data on load and restore the controls and appearance.
@@ -96,5 +97,6 @@ if ($savedPreferences !== null) { /* when there is no saved preferences it turns
   document.body.setAttribute("data-theme", $preferences.theme);
   $collection.setAttribute("data-layout", $preferences.layout);
   /* now I'm setting the preferences to be visible in the page, to change the appearence based on what I chose in the page */
+  $status.textContent = "Your preferences have been restored."; /* tell the user a message that the changes they made were restores */
 }
 // Add short pseudocode comments before writing each feature.
