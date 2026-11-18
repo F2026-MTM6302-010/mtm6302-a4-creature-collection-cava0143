@@ -44,6 +44,8 @@ const $collection = document.getElementById("collection");
 const $theme = document.getElementById("theme");
 const $layout = document.getElementById("layout");
 const $status = document.getElementById("status");
+// Conitnuing the consts from html for the step 4
+const $storageKey = "mtm6302-a4-preferences";
 
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
 /* I was not able to find a START-HERE.md so I saw the ASSIGNMENT.md and README.md  if it's not a problem. */
@@ -65,13 +67,34 @@ for (const $creature of $creatures) {
 /* Changing the habitat theme and its features */
 $theme.addEventListener("change", function() {
     document.body.setAttribute("data-theme", $theme.value);
+    savePreferences() /* calling the function created to save the preferences chosen for the theme */
 });
 
 /* Organizing the cards accodring to each layout provided */
 $layout.addEventListener("change", function() {
     $collection.setAttribute("data-layout", $layout.value);
+    savePreferences() /* calling the function created to save the preferences chosen for the cards layout */
 });
+
 // 4. Save both selected preferences to Local Storage.
+function savePreferences() {
+    const $preferences = {
+        theme: $theme.value,
+        layout: $layout.value
+    };
+
+    localStorage.setItem($storageKey, JSON.stringify($preferences)); /* just to remind me: this is just to tell that I want to save the preferences in the local storage, that's why I am setting an item, after to save these preferences I should get the item on local storage */
+}
 
 // 5. Check for saved data on load and restore the controls and appearance.
+const $savedPreferences = localStorage.getItem($storageKey);
+if ($savedPreferences !== null) { /* when there is no saved preferences it turns null, and !== verify if the result is different than null */
+  const $preferences = JSON.parse($savedPreferences);
+  $theme.value = $preferences.theme;
+  $layout.value = $preferences.layout;
+  /* until now (above) I was just setting the data but nothing visual yet */
+  document.body.setAttribute("data-theme", $preferences.theme);
+  $collection.setAttribute("data-layout", $preferences.layout);
+  /* now I'm setting the preferences to be visible in the page, to change the appearence based on what I chose in the page */
+}
 // Add short pseudocode comments before writing each feature.
